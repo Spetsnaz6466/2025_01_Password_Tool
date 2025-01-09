@@ -1,6 +1,7 @@
 
 import string
 import random
+import pandas as pd
 def intNumbers():
     "Ask for positive integer numbers"
     try:
@@ -43,9 +44,10 @@ def yesNo(message):
         message = input(f"Enter y/n: ")
         return yesNo(message)
 
-def passwordGenerate(length,specialSym,capsLetter,number,lower):
+def passwordGenerate(specialSym,capsLetter,number,lower):
     """Password creation
-    EDA List, random, randint """
+    input: Special chars, capital letters, numbers and lover case
+    length = specialSym+capsLetter+number+lower """
     password = ""
     special = list(string.punctuation)
     caps = list(string.ascii_uppercase)
@@ -53,17 +55,20 @@ def passwordGenerate(length,specialSym,capsLetter,number,lower):
     lowercase = list(string.ascii_lowercase)
     matrix = [special,caps,digits,lowercase]
     specs = [specialSym,capsLetter,number,lower]
-    print(specs)
     orden = 0
     for i in specs:
         while i > 0:
-            password += matrix[orden][random.randint(0,len(matrix[orden]) )]
-            print(password)
+            password += matrix[orden][random.randint(0,len(matrix[orden])-1) ]
             i -= 1
         orden += 1
-    print(password)
+    print("pASSWORD ---> ",password)
 
-passwordGenerate(2,1,1,2,4)
+#file = input("CSV User Data file: ")
+file = "clave.csv"
+file2 = pd.DataFrame(file)
+for i in file2:
+    print(i)
+#passwordGenerate(1,1,2,4)
 
 #EDA: List of dictionaries & random selection
 usersInformation =[]
