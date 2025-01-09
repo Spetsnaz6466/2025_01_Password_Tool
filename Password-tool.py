@@ -1,4 +1,6 @@
 
+import string
+import random
 def intNumbers():
     "Ask for positive integer numbers"
     try:
@@ -41,14 +43,38 @@ def yesNo(message):
         message = input(f"Enter y/n: ")
         return yesNo(message)
 
-# Number of users (optional)
-passwordQty = input(f'How many password: ')
-passwordQty = validPositiveIntNumbers(passwordQty)
-print(passwordQty)
+def passwordGenerate(length,specialSym,capsLetter,number,lower):
+    """Password creation
+    EDA List, random, randint """
+    password = ""
+    special = list(string.punctuation)
+    caps = list(string.ascii_uppercase)
+    digits = list(string.digits)
+    lowercase = list(string.ascii_lowercase)
+    matrix = [special,caps,digits,lowercase]
+    specs = [specialSym,capsLetter,number,lower]
+    print(specs)
+    orden = 0
+    for i in specs:
+        while i > 0:
+            password += matrix[orden][random.randint(0,len(matrix[orden]) )]
+            print(password)
+            i -= 1
+        orden += 1
+    print(password)
+
+passwordGenerate(2,1,1,2,4)
+
+#EDA: List of dictionaries & random selection
+usersInformation =[]
 
 # Load user data by file
 userDataLoadByFile = yesNo("Load user data by file")
-print(userDataLoadByFile)
+if userDataLoadByFile == 'n':
+    # Number of users (optional)
+    passwordQty = input(f'How many password: ')
+    passwordQty = validPositiveIntNumbers(passwordQty)
+    print(passwordQty)
 
 # Save passwords to file
 savePasswordToFile = yesNo("Save passwords to file")
@@ -66,3 +92,28 @@ print(printPasswordToTerminal)
 
 userData = {'name':'','email':'','password': ''}
 print
+
+
+
+
+
+
+"""special = list(string.punctuation)
+    while specialSym > 0:
+        password += special[random.randint(0,len(special))]
+        specialSym -= 1
+
+    caps = list(string.ascii_uppercase)
+    while capsLetter > 0:
+        password += caps[random.randint(0,len(caps))]
+        capsLetter -= 1
+
+    digits = list(string.digits)
+    while number > 0:
+        password += digits[random.randint(0,len(digits))]
+        number -= 1
+
+    lowercase = list(string.ascii_lowercase)
+    while lower > 0:
+        password += lowercase[random.randint(0,len(lowercase))]
+        lower -= 1"""
