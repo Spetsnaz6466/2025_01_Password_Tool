@@ -148,5 +148,8 @@ if __name__ == "__main__":
         if userDataLoadByFile == 'n':
             noFileChoice()
         else:
+            os.system("clear")
+            print("Files on the curren working directory:\n")
+            os.system("ls -lsa")
             file = input("\nIngrese file con user data: ")
             yesFileChoice(file)
